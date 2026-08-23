@@ -1,10 +1,17 @@
 #include <stdio.h>
 
 int main(void) {
-  int w, h;
-  scanf("%d", &w);
-  scanf("%d", &h);
-  // Print w * h.
-  printf("%d", w * h);
+  int nums[5] = {0};
+  int max = 0;
+  for (int i = 0; i < 5; i++)
+    scanf("%d", &nums[i]);
+
+  for (int i = 0; i < 5; i++) {
+    if (nums[i] > max) {
+      max = nums[i];
+    }
+  }
+
+  printf("%d", max);
   return 0;
 }
