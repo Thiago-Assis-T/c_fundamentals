@@ -1,14 +1,27 @@
 #include <stdio.h>
-#include <string.h>
 
 int main(void) {
-  char buf[100];
-  long long stringLength = 0;
-  fgets(buf, sizeof buf, stdin);
+  int num = 0;
+  scanf("%d", &num);
 
-  stringLength = strlen(buf);
+  /* Print exactly one line:
+       n divisible by 15 -> FizzBuzz
+       n divisible by 3  -> Fizz
+       n divisible by 5  -> Buzz
+       anything else     -> n itself
 
-  printf("%lld", stringLength - 1);
-  // Strip trailing newline if present, then print length.
+     TODO: write the if / else if / else chain. All four cases. */
+
+  if (num % 15 == 0) {
+    printf("FizzBuzz");
+
+  } else if (num % 3 == 0) {
+    printf("Fizz");
+  } else if (num % 5 == 0) {
+    printf("Buzz");
+  } else {
+    printf("%d", num);
+  }
+
   return 0;
 }
