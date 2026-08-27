@@ -1,45 +1,40 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef struct {
-  int x, y;
-} Point;
+int static doSum(int const *nums, int const size) {
+  int sum = 0;
 
-int static PointDistanceSquared(Point *point1, Point *point2) {
-  // (x2-x1)² + (y2-y1)²
+#pragma unroll 5
+  for (int i = 0; i < size; i++) {
+    sum += nums[i];
+  }
 
-  int point1x = point1->x;
-  int point1y = point1->y;
-
-  int point2x = point2->x;
-  int point2y = point2->y;
-
-  int xDifference = point2x - point1x;
-  int yDifference = point2y - point1y;
-
-  int distanceSquared =
-      (xDifference * xDifference) + (yDifference * yDifference);
-
-  return distanceSquared;
+  return sum;
 }
 
 int main(void) {
-  int point1x = 0;
-  int point1y = 0;
-  int point2x = 0;
-  int point2y = 0;
-  scanf("%d %d %d %d", &point1x, &point1y, &point2x, &point2y);
+  int size = 0;
 
-  Point point1 = {
-      .x = point1x,
-      .y = point1y,
-  };
+  scanf("%d", &size);
 
-  Point point2 = {
-      .x = point2x,
-      .y = point2y,
-  };
+  int *nums =
+      malloc(size * sizeof(int)); /* n ints' worth of bytes, from the heap */
+  if (nums == NULL) {             /* allocation CAN fail */
+    return 1;
+  }
 
-  int pointDistanceSquared = PointDistanceSquared(&point1, &point2);
-  printf("%d", pointDistanceSquared);
+#pragma unroll 5
+  for (int i = 0; i < size; i++) {
+    scanf("%d", &nums[i]); /* index it exactly like an array */
+  }
+
+  // for (int i = 0; i < size; i++) {
+  //   printf("%d\n", nums[i]); /* index it exactly like an array */
+  // }
+
+  int sum = doSum(nums, size);
+  printf("%d\n", sum);
+
+  free(nums); /* hand the bytes back */
   return 0;
 }
